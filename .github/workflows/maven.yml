@@ -30,32 +30,11 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-maven-
 
-      # 4. Установка Node.js (для Playwright)
-      - name: Set up Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: '23'
-
-      # 5. Кэш npm
-      - name: Cache Node modules
-        uses: actions/cache@v4
-        with:
-          path: ~/.npm
-          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
-          restore-keys: |
-            ${{ runner.os }}-node-
-
-      # 6. Установка зависимостей Node.js и Playwright
-      - name: Install Node.js dependencies and Playwright
-        run: |
-          npm install
-          npx playwright install --with-deps
-
-      # 7. Прогон тестов Maven
+      # 4. Прогон тестов Maven
       - name: Build and test with Maven
         run: mvn -B -e -X clean test
 
-      # 8. Загрузка surefire отчетов как артефакт
+      # 5. Загрузка surefire отчетов как артефакт
       - name: Upload Surefire reports
         if: always()
         uses: actions/upload-artifact@v4
@@ -63,15 +42,19 @@ jobs:
           name: surefire-reports
           path: target/surefire-reports
 
-      # 9. Установка Allure CLI
+      # 6. Установка Allure CLI напрямую
       - name: Install Allure CLI
-        uses: allure-framework/allure-action@2.27.0
+        run: |
+          wget https://github.com/allure-framework/allure2/releases/download/2.27.0/allure-2.27.0.zip
+          unzip -q allure-2.27.0.zip -d /tmp/
+          echo "/tmp/allure-2.27.0/bin" >> $GITHUB_PATH
 
-      # 10. Генерация Allure отчета
+      # 7. Генерация Allure отчета
       - name: Generate Allure Report
-        run: allure generate target/allure-results --clean -o target/allure-report
+        run: |
+          allure generate target/allure-results --clean -o target/allure-report
 
-      # 11. Загрузка Allure отчета как артефакт
+      # 8. Загрузка Allure отчета как артефакт
       - name: Upload Allure report
         uses: actions/upload-artifact@v4
         with:

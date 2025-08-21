@@ -58,8 +58,15 @@
                     <printSummary>true</printSummary>
                     <reportFormat>plain</reportFormat>
                     <redirectTestOutputToFile>false</redirectTestOutputToFile>
-                    <useFile>false</useFile> <!-- Лог будет идти сразу в консоль -->
+                    <useFile>false</useFile>
                 </configuration>
+            </plugin>
+
+            <!-- ✅ Подключаем Allure Maven Plugin -->
+            <plugin>
+                <groupId>io.qameta.allure</groupId>
+                <artifactId>allure-maven</artifactId>
+                <version>2.11.2</version>
             </plugin>
         </plugins>
     </build>

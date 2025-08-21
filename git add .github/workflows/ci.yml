@@ -1,0 +1,47 @@
+name: Java + Playwright CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      # 1. Получаем код
+      - uses: actions/checkout@v4
+
+      # 2. Настройка Java 20 для Maven
+      - name: Set up JDK 20
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '20'
+
+      # 3. Кеш Maven
+      - name: Cache Maven dependencies
+        uses: actions/cache@v4
+        with:
+          path: ~/.m2/repository
+          key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
+          restore-keys: |
+            ${{ runner.os }}-maven-
+
+      # 4. Запуск Maven сборки и тестов
+      - name: Build and test with Maven
+        run: mvn clean test
+
+      # 5. Установка Node.js для Playwright
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '23'
+
+      # 6. Установка Playwright
+      - name: Install Playwright
+        run: |
+          npm install
+          npx playwright install --with-deps

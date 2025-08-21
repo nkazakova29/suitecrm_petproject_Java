@@ -65,9 +65,7 @@ jobs:
 
       # 9. Установка Allure CLI
       - name: Install Allure CLI
-        uses: allure-framework/allure-action@v2
-        with:
-          version: 2.25.0
+        uses: allure-framework/allure-action@2.27.0
 
       # 10. Генерация Allure отчета
       - name: Generate Allure Report

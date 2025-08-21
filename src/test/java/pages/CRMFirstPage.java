@@ -51,4 +51,15 @@ public class CRMFirstPage {
             return false;
         }
     }
+
+    @Step("Checking Error after failed login")
+    public boolean isErrorAppear(){
+        try {
+            page.locator("text=You must specify a valid username and password.")
+                    .waitFor(new Locator.WaitForOptions().setState(WaitForSelectorState.VISIBLE).setTimeout(5000));
+            return true;
+        } catch (PlaywrightException e) {
+            return false;
+        }
+    }
 }

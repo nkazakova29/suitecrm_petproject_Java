@@ -18,4 +18,15 @@ public class CRMTests extends BaseTest {
         firstPage.login("will", "will"); // Demo creds
         assertTrue(firstPage.isLoggedIn(), "Welcome to the SuiteCRM 7 Demo");
     }
+
+    @Test
+    @Description("Unsuccessful login")
+    public void testFailedLogin() {
+        CRMFirstPage firstPage = new CRMFirstPage(page);
+        firstPage.open();
+        firstPage.goTOLogInPage();
+        firstPage.login("login", "will"); // Demo creds
+        assertFalse(firstPage.isLoggedIn(), "Welcome to the SuiteCRM 7 Demo");
+        assertTrue(firstPage.isErrorAppear(), "You must specify a valid username and password.");
+    }
 }

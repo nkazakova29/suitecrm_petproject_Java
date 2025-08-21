@@ -34,6 +34,13 @@
         <version>RELEASE</version>
         <scope>test</scope>
     </dependency>
+    <!-- https://mvnrepository.com/artifact/io.qameta.allure/allure-junit5 -->
+    <dependency>
+        <groupId>io.qameta.allure</groupId>
+        <artifactId>allure-junit5</artifactId>
+        <version>2.29.1</version>
+        <scope>test</scope>
+    </dependency>
 </dependencies>
     <!-- https://mvnrepository.com/artifact/io.qameta.allure/allure-java-commons -->
   <!--  <dependency>
@@ -43,11 +50,17 @@
     </dependency>-->
     <build>
         <plugins>
-<plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-surefire-plugin</artifactId>
-        <version>3.1.2</version>
-    </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>3.1.2</version>
+                <configuration>
+                    <printSummary>true</printSummary>
+                    <reportFormat>plain</reportFormat>
+                    <redirectTestOutputToFile>false</redirectTestOutputToFile>
+                    <useFile>false</useFile> <!-- Лог будет идти сразу в консоль -->
+                </configuration>
+            </plugin>
         </plugins>
     </build>
 </project>

@@ -18,10 +18,12 @@ public class CRMTests extends BaseTest {
         firstPage.goTOLogInPage();
         firstPage.login("will", "will"); // Demo creds
        ;*/
-        Allure.step("Open the target site", firstPage::open);
-        Allure.step("Go to the Login Page", firstPage::goTOLogInPage);
-        Allure.step("Perform login", () -> firstPage.login("will", "will"));
-        assertTrue(firstPage.isLoggedIn(), "Welcome to the SuiteCRM 7 Demo");
+        Allure.step("Open site and login", () -> {
+            firstPage.open();
+            firstPage.goTOLogInPage();
+            firstPage.login("will", "will");
+            assertTrue(firstPage.isLoggedIn(), "User should be logged in");
+        });
     }
 
     @Test

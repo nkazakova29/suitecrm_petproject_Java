@@ -60,7 +60,7 @@
                 <artifactId>allure-maven</artifactId>
                 <version>2.11.2</version>
                 <configuration>
-                    <resultsDirectory>${project.basedir}/allure-report</resultsDirectory>
+                    <resultsDirectory>${project.basedir}/allure-results</resultsDirectory>
                 </configuration>
             </plugin>
         </plugins>

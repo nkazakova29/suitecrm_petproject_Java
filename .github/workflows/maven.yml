@@ -33,19 +33,19 @@ jobs:
 
       - name: Debug allure-results
         run: |
-          echo "Listing target/allure-results folder:"
-          ls -la target/allure-results || echo "No results directory"
+          echo "Listing allure-results folder:"
+          ls -la allure-results || echo "No results directory"
           echo "----"
-          find target/allure-results -maxdepth 1 -type f
+          find allure-results -maxdepth 1 -type f
 
       - name: Generate Allure report
         run: |
-          allure generate target/allure-results --clean -o target/allure-report
+          allure generate allure-results --clean -o allure-report
           echo "Listing generated report:"
-          ls -la target/allure-report
+          ls -la allure-report
 
       - name: Deploy Allure report to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./target/allure-report
+          publish_dir: ./allure-report

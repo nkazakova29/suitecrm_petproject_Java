@@ -23,11 +23,13 @@ jobs:
       - name: Build and run tests
         run: mvn clean test
 
-      - name: Install Allure CLI
+      - name: Install Allure CLI (no PPA)
         run: |
-          sudo apt-add-repository ppa:qameta/allure -y
-          sudo apt-get update
-          sudo apt-get install allure -y
+          wget https://github.com/allure-framework/allure2/releases/download/2.29.1/allure-2.29.1.tgz
+          tar -xvzf allure-2.29.1.tgz
+          sudo mv allure-2.29.1 /opt/allure
+          sudo ln -s /opt/allure/bin/allure /usr/bin/allure
+          allure --version
 
       - name: Debug allure-results
         run: |

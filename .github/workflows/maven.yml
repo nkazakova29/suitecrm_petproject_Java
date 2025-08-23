@@ -23,23 +23,26 @@ jobs:
       - name: Build and run tests
         run: mvn clean test
 
-      - name: Install Allure CLI (no PPA)
+      - name: Install Allure CLI
         run: |
-          wget https://github.com/allure-framework/allure2/releases/download/2.29.1/allure-2.29.1.tgz
-          tar -xvzf allure-2.29.1.tgz
-          sudo mv allure-2.29.1 /opt/allure
+          wget https://repo.maven.apache.org/maven2/io/qameta/allure/allure-commandline/2.29.0/allure-commandline-2.29.0.tgz
+          tar -xzf allure-commandline-2.29.0.tgz
+          sudo mv allure-2.29.0 /opt/allure
           sudo ln -s /opt/allure/bin/allure /usr/bin/allure
           allure --version
 
       - name: Debug allure-results
         run: |
-          echo "Listing allure-results folder:"
-          ls -l target/allure-results || echo "No results dir"
+          echo "Listing target/allure-results folder:"
+          ls -la target/allure-results || echo "No results directory"
           echo "----"
-          find target/allure-results -type f -maxdepth 1 || echo "No files"
+          find target/allure-results -maxdepth 1 -type f
 
       - name: Generate Allure report
-        run: allure generate target/allure-results --clean -o target/allure-report
+        run: |
+          allure generate target/allure-results --clean -o target/allure-report
+          echo "Listing generated report:"
+          ls -la target/allure-report
 
       - name: Deploy Allure report to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3

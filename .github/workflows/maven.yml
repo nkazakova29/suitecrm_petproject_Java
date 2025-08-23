@@ -1,61 +1,36 @@
-name: Java + Playwright + Allure CI
+name: Java Playwright Tests
 
 on:
   push:
-    branches: [ main ]
-  pull_request:
-    branches: [ main ]
+    branches: [main]
 
 jobs:
-  build-and-test:
+  test:
     runs-on: ubuntu-latest
 
     steps:
-      # 1. Checkout code
-      - name: Checkout code
-        uses: actions/checkout@v3
+      - uses: actions/checkout@v3
 
-      # 2. Set up JDK 20
-      - name: Set up JDK 20
+      - name: Set up JDK
         uses: actions/setup-java@v3
         with:
-          java-version: '20'
           distribution: 'temurin'
+          java-version: '17'
 
-      # 3. Install Playwright browsers
-      - name: Install Playwright browsers
-        run: mvn exec:java -e -Dexec.mainClass="com.microsoft.playwright.CLI" -Dexec.args="install"
-
-      # 4. Run tests with Maven
-      - name: Run tests with Maven
+      - name: Build and run tests
         run: mvn clean test
 
-      # 5. Debug: list allure-results to check that XML files were generated
-      - name: Debug Allure Results
+      - name: Install Allure
         run: |
-          echo "Listing allure-results folder:"
-          if [ -d "allure-results" ]; then
-            ls -la allure-results
-          else
-            echo "Folder allure-results not found!"
-          fi
+          sudo apt-add-repository ppa:qameta/allure -y
+          sudo apt-get update
+          sudo apt-get install allure -y
 
-      # 6. Upload allure-results as artifact (для скачивания и проверки)
-      - name: Upload Allure Results as Artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: allure-results
-          path: allure-results
+      - name: Generate Allure report
+        run: allure generate target/allure-results --clean -o target/allure-report
 
-      # 7. Generate Allure Report
-      - name: Generate Allure Report
-        run: mvn allure:report
-
-      # 8. Deploy to GitHub Pages
-      - name: Deploy Allure Report to GitHub Pages
+      - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_branch: gh-pages
-          publish_dir: ./target/site/allure-maven-plugin/
-          keep_files: true
+          publish_dir: ./target/allure-report

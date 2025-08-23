@@ -1,5 +1,1 @@
-{
-  "uid" : "98d3104e051c652961429bf95fa0b5d6",
-  "name" : "suites",
-  "children" : [ ]
-}
+{"uid":"98d3104e051c652961429bf95fa0b5d6","name":"suites","children":[{"name":"tests.CRMTests","children":[{"name":"testLogin()","uid":"9d9c82cae6e9d521","parentUid":"3eceb1cc8297cf8e47766515fb592b82","status":"passed","time":{"start":1755919562891,"stop":1755919570199,"duration":7308},"flaky":false,"newFailed":false,"newPassed":false,"newBroken":false,"retriesCount":0,"retriesStatusChange":false,"parameters":[],"tags":[]},{"name":"testFailedLogin()","uid":"c7433fabb6a91e78","parentUid":"3eceb1cc8297cf8e47766515fb592b82","status":"passed","time":{"start":1755919570250,"stop":1755919580965,"duration":10715},"flaky":false,"newFailed":false,"newPassed":false,"newBroken":false,"retriesCount":0,"retriesStatusChange":false,"parameters":[],"tags":[]}],"uid":"3eceb1cc8297cf8e47766515fb592b82"}]}

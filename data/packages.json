@@ -1,5 +1,1 @@
-{
-  "uid" : "83edc06c07f9ae9e47eb6dd1b683e4e2",
-  "name" : "packages",
-  "children" : [ ]
-}
+{"uid":"83edc06c07f9ae9e47eb6dd1b683e4e2","name":"packages","children":[{"name":"tests.CRMTests","children":[{"name":"testLogin","uid":"9d9c82cae6e9d521","parentUid":"15aa96426541274f11b74b6bc97ef576","status":"passed","time":{"start":1755919562891,"stop":1755919570199,"duration":7308},"flaky":false,"newFailed":false,"newPassed":false,"newBroken":false,"retriesCount":0,"retriesStatusChange":false,"parameters":[],"tags":[]},{"name":"testFailedLogin","uid":"c7433fabb6a91e78","parentUid":"15aa96426541274f11b74b6bc97ef576","status":"passed","time":{"start":1755919570250,"stop":1755919580965,"duration":10715},"flaky":false,"newFailed":false,"newPassed":false,"newBroken":false,"retriesCount":0,"retriesStatusChange":false,"parameters":[],"tags":[]}],"uid":"tests.CRMTests"}]}

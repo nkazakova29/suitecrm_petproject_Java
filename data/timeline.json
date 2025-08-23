@@ -1,5 +1,1 @@
-{
-  "uid" : "ab17fc5a4eb3bca4b216b548c7f9fcbc",
-  "name" : "timeline",
-  "children" : [ ]
-}
+{"uid":"ab17fc5a4eb3bca4b216b548c7f9fcbc","name":"timeline","children":[{"name":"pkrvmqc4gcfdwos","children":[{"name":"3302@pkrvmqc4gcfdwos.main(1)","children":[{"name":"testLogin()","uid":"9d9c82cae6e9d521","parentUid":"71bb567a4bb4a3f821e73f134e36e737","status":"passed","time":{"start":1755919562891,"stop":1755919570199,"duration":7308},"flaky":false,"newFailed":false,"newPassed":false,"newBroken":false,"retriesCount":0,"retriesStatusChange":false,"parameters":[],"tags":[]},{"name":"testFailedLogin()","uid":"c7433fabb6a91e78","parentUid":"71bb567a4bb4a3f821e73f134e36e737","status":"passed","time":{"start":1755919570250,"stop":1755919580965,"duration":10715},"flaky":false,"newFailed":false,"newPassed":false,"newBroken":false,"retriesCount":0,"retriesStatusChange":false,"parameters":[],"tags":[]}],"uid":"71bb567a4bb4a3f821e73f134e36e737"}],"uid":"4e0b6f70998172730fa1ccc2178f5fd3"}]}

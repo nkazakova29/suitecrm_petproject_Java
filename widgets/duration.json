@@ -1,1 +1,1 @@
-[ ]
+[{"uid":"c7433fabb6a91e78","name":"testFailedLogin()","time":{"start":1755919570250,"stop":1755919580965,"duration":10715},"status":"passed","severity":"normal"},{"uid":"9d9c82cae6e9d521","name":"testLogin()","time":{"start":1755919562891,"stop":1755919570199,"duration":7308},"status":"passed","severity":"normal"}]

@@ -18,7 +18,7 @@ public class BaseTest {
     @BeforeAll
     public static void setUpAll() {
         Playwright playwright = Playwright.create();
-        browser = playwright.chromium().launch(new BrowserType.LaunchOptions().setHeadless(True));
+        browser = playwright.chromium().launch(new BrowserType.LaunchOptions().setHeadless(true));
     }
 
     @BeforeEach

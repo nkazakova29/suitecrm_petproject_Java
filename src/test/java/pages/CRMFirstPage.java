@@ -9,19 +9,19 @@ import io.qameta.allure.Step;
 public class CRMFirstPage {
 
     private final Page page;
-    private final String url = "https://suitecrm.com/demo/";
-    private final Locator goToLogInBtn;
+    private final String url = "https://opensource-demo.orangehrmlive.com/";
     private final Locator loginField;
     private final Locator passwordField;
     private final Locator submitBtn;
+    private final Locator dropDown;
 
 
     public CRMFirstPage(Page page) {
         this.page = page;
-        this.goToLogInBtn = page.locator("text=ACCESS THE SUITECRM 7 ESR DEMO");
-        this.loginField = page.locator("#user_name");
-        this.passwordField = page.locator("#username_password");
-        this.submitBtn = page.locator("#bigbutton");
+        this.loginField = page.locator("[name='username']");
+        this.passwordField = page.locator("[name='password']");
+        this.submitBtn = page.locator("[type='submit']");
+        this.dropDown = page.locator(".oxd-userdropdown-icon");
     }
 
     @Step("Open the target site")
@@ -29,10 +29,6 @@ public class CRMFirstPage {
         page.navigate(url);
     }
 
-    @Step("Go to the Login Page")
-    public void goTOLogInPage(){
-        goToLogInBtn.click();
-    }
 
     @Step("Login process")
     public void login(String username, String password) {
@@ -44,7 +40,8 @@ public class CRMFirstPage {
     public boolean isLoggedIn() {
         // пример проверки: ищем элемент с id="user-name"
         try {
-            page.locator("text=Welcome to the SuiteCRM 7 Demo")
+            dropDown.click();  // открыть список
+            page.locator("text=Logout")
                     .waitFor(new Locator.WaitForOptions().setState(WaitForSelectorState.VISIBLE).setTimeout(5000));
             return true;
         } catch (PlaywrightException e) {
@@ -52,14 +49,18 @@ public class CRMFirstPage {
         }
     }
 
+
     @Step("Checking Error after failed login")
     public boolean isErrorAppear(){
         try {
-            page.locator("text=You must specify a valid username and password.")
+            page.locator("text=Invalid credentials")
                     .waitFor(new Locator.WaitForOptions().setState(WaitForSelectorState.VISIBLE).setTimeout(5000));
             return true;
         } catch (PlaywrightException e) {
             return false;
         }
     }
+
 }
+
+

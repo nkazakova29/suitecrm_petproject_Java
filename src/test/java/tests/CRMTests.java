@@ -14,15 +14,12 @@ public class CRMTests extends BaseTest {
 
     public void testLogin() {
         CRMFirstPage firstPage = new CRMFirstPage(page);
-/*        firstPage.open();
-        firstPage.goTOLogInPage();
-        firstPage.login("will", "will"); // Demo creds
-       ;*/
+        String username = "Admin";
+        String password = "admin123";
         Allure.step("Open site and login", () -> {
-            firstPage.open();
-            firstPage.goTOLogInPage();
-            firstPage.login("will", "will");
-            assertTrue(firstPage.isLoggedIn(), "User should be logged in");
+        firstPage.open();
+        firstPage.login(username, password);
+            assertTrue(firstPage.isLoggedIn(), "Logout");
         });
     }
 
@@ -30,13 +27,11 @@ public class CRMTests extends BaseTest {
     @Description("Unsuccessful login")
     public void testFailedLogin() {
         CRMFirstPage firstPage = new CRMFirstPage(page);
-       /* firstPage.open();
-        firstPage.goTOLogInPage();
-        firstPage.login("login", "will"); // Demo creds*/
+        String username = "Admin";
+        String password = "Admin";
         Allure.step("Open the target site", firstPage::open);
-        Allure.step("Go to the Login Page", firstPage::goTOLogInPage);
-        Allure.step("Perform login", () -> firstPage.login("login", "will"));
-        assertFalse(firstPage.isLoggedIn(), "Welcome to the SuiteCRM 7 Demo");
-        assertTrue(firstPage.isErrorAppear(), "You must specify a valid username and password.");
+        Allure.step("Perform login", () -> firstPage.login(username, password));
+        assertFalse(firstPage.isLoggedIn(), "Dashboard");
+        assertTrue(firstPage.isErrorAppear(), "Invalid Credentials");
     }
 }

@@ -13,7 +13,7 @@ public class CRMFirstPage {
     private final Locator loginField;
     private final Locator passwordField;
     private final Locator submitBtn;
-    private final Locator dropDown;
+
 
 
     public CRMFirstPage(Page page) {
@@ -21,7 +21,6 @@ public class CRMFirstPage {
         this.loginField = page.locator("[name='username']");
         this.passwordField = page.locator("[name='password']");
         this.submitBtn = page.locator("[type='submit']");
-        this.dropDown = page.locator(".oxd-userdropdown-icon");
     }
 
     @Step("Open the target site")
@@ -36,18 +35,6 @@ public class CRMFirstPage {
         passwordField.fill(password);
         submitBtn.click();
     }
-    @Step("Checking that user can proceed to the next page")
-    public boolean isLoggedIn() {
-        // пример проверки: ищем элемент с id="user-name"
-        try {
-            dropDown.click();  // открыть список
-            page.locator("text=Logout")
-                    .waitFor(new Locator.WaitForOptions().setState(WaitForSelectorState.VISIBLE).setTimeout(5000));
-            return true;
-        } catch (PlaywrightException e) {
-            return false;
-        }
-    }
 
 
     @Step("Checking Error after failed login")
@@ -60,6 +47,18 @@ public class CRMFirstPage {
             return false;
         }
     }
+
+    @Step("checking if user has been logged out")
+    public boolean isLoggedOut(){
+        try {
+            submitBtn
+                    .waitFor(new Locator.WaitForOptions().setState(WaitForSelectorState.VISIBLE).setTimeout(5000));
+            return true;
+        } catch (PlaywrightException e) {
+            return false;
+        }
+    }
+
 
 }
 

@@ -1,3 +1,4 @@
 "Status","Start Time","Stop Time","Duration in ms","Parent Suite","Suite","Sub Suite","Test Class","Test Method","Name","Description"
-"passed","Thu Sep 18 23:50:00 UTC 2025","Thu Sep 18 23:50:32 UTC 2025","31313","","tests.CRMTests","","tests.CRMTests","testFailedLogin","testFailedLogin()","Unsuccessful login"
-"passed","Thu Sep 18 23:49:58 UTC 2025","Thu Sep 18 23:50:00 UTC 2025","2537","","tests.CRMTests","","tests.CRMTests","testLogin","testLogin()","Successful login"
+"passed","Fri Sep 19 16:09:57 UTC 2025","Fri Sep 19 16:10:00 UTC 2025","3002","","tests.CRMTests","","tests.CRMTests","testLogout","testLogout()","Logout"
+"passed","Fri Sep 19 16:09:26 UTC 2025","Fri Sep 19 16:09:57 UTC 2025","30972","","tests.CRMTests","","tests.CRMTests","testFailedLogin","testFailedLogin()","Unsuccessful login"
+"passed","Fri Sep 19 16:09:24 UTC 2025","Fri Sep 19 16:09:26 UTC 2025","2168","","tests.CRMTests","","tests.CRMTests","testLogin","testLogin()","Successful login"

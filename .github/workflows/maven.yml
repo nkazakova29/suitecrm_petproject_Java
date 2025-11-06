@@ -34,7 +34,7 @@ jobs:
           wget curl unzip \
           libnss3 libatk1.0-0 libcups2 libxcomposite1 libxrandr2 libgtk-3-0 \
           libpangocairo-1.0-0 libxss1 libgbm1 libwoff1 libx264-dev libavif-dev \
-          libasound2t64 libpulse0
+          libasound2t64 libpulse0 netcat
 
     - name: Setup Node.js (required for Playwright)
       uses: actions/setup-node@v3
@@ -43,6 +43,12 @@ jobs:
 
     - name: Install Playwright browsers
       run: npx playwright install --with-deps
+
+    - name: Install Allure CLI
+      run: |
+        sudo apt-add-repository -y ppa:qameta/allure
+        sudo apt-get update
+        sudo apt-get install -y allure
 
     - name: Configure Cloud SQL Proxy
       run: |
@@ -55,11 +61,16 @@ jobs:
           guideflow-stage:europe-west1:guideflow-replica \
           --credentials-file=cloud_sql_credentials.json \
           --port=5437 &
-        # Ждём 5 секунд, чтобы прокси поднялся
-        sleep 5
+        # Ждём, пока порт 5437 будет доступен
+        for i in {1..10}; do
+          nc -z localhost 5437 && break || sleep 1
+        done
 
     - name: Run Maven tests
       run: mvn clean test -B
+
+    - name: Generate Allure report
+      run: allure generate target/allure-results --clean -o target/allure-report
 
     - name: Upload Allure results
       if: always()
@@ -67,3 +78,10 @@ jobs:
       with:
         name: allure-results
         path: target/allure-results
+
+    - name: Upload Allure report
+      if: always()
+      uses: actions/upload-artifact@v3
+      with:
+        name: allure-report
+        path: target/allure-report

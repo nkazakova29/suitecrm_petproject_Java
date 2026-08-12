@@ -2,6 +2,7 @@ package tests;
 
 import BaseTest.BaseTest;
 import com.microsoft.playwright.Browser;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import pages.HomePage;
 import pages.MyInfoPage;

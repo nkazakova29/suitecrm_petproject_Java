@@ -6,6 +6,10 @@ on:
   pull_request:
     branches: [ main ]
 
+# Права, необходимые для публикации отчета на GitHub Pages
+permissions:
+  contents: write
+
 jobs:
   test:
     runs-on: ubuntu-24.04
@@ -51,24 +55,31 @@ jobs:
     - name: Run Maven tests
       run: mvn clean test -B
       continue-on-error: true 
-    
+
     - name: Generate Allure Report
       if: always()
       run: mvn allure:report -B
-
 
     - name: Upload Allure results
       if: always()
       uses: actions/upload-artifact@v4
       with:
         name: allure-results
-        path: target/site/allure-maven-plugin
+        path: allure-results
         if-no-files-found: ignore
 
-    - name: Upload Allure report
+    - name: Upload Allure report artifact
       if: always()
       uses: actions/upload-artifact@v4
       with:
         name: allure-report
         path: target/site/allure-maven-plugin
         if-no-files-found: ignore
+
+
+    - name: Deploy Allure Report to GitHub Pages
+      uses: peaceiris/actions-gh-pages@v3
+      if: always()
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: target/site/allure-maven-plugin

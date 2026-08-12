@@ -10,13 +10,6 @@ jobs:
   test:
     runs-on: ubuntu-24.04
 
-    env:
-      DB_HOST: localhost
-      DB_PORT: 5437
-      DB_NAME: guideflow
-      DB_USER: ${{ secrets.DB_USERNAME }}
-      DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
-
     steps:
     - name: Checkout code
       uses: actions/checkout@v5

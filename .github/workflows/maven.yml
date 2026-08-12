@@ -19,16 +19,16 @@ jobs:
 
     steps:
     - name: Checkout code
-      uses: actions/checkout@v4
+      uses: actions/checkout@v5
 
     - name: Setup Java
-      uses: actions/setup-java@v4
+      uses: actions/setup-java@v5
       with:
         distribution: temurin
         java-version: 17
 
     - name: Setup Node.js (required for Playwright & Allure)
-      uses: actions/setup-node@v4
+      uses: actions/setup-node@v5
       with:
         node-version: 20
 
@@ -79,7 +79,7 @@ jobs:
 
     - name: Upload Allure results
       if: always()
-      uses: actions/upload-artifact@v4
+      uses: actions/upload-artifact@v5
       with:
         name: allure-results
         path: |
@@ -89,7 +89,7 @@ jobs:
 
     - name: Upload Allure report
       if: always()
-      uses: actions/upload-artifact@v4
+      uses: actions/upload-artifact@v5
       with:
         name: allure-report
         path: target/allure-report

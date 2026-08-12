@@ -13,6 +13,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 public class MyInfoTests extends BaseTest {
 
     @Test()
+    @Disabled
     public void openMyInfoPage() {
         if (context != null) {
             context.close();

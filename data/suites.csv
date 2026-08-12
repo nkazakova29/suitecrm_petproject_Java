@@ -1,4 +1,5 @@
 "Status","Start Time","Stop Time","Duration in ms","Parent Suite","Suite","Sub Suite","Test Class","Test Method","Name","Description"
-"passed","Fri Sep 19 16:09:57 UTC 2025","Fri Sep 19 16:10:00 UTC 2025","3002","","tests.CRMTests","","tests.CRMTests","testLogout","testLogout()","Logout"
-"passed","Fri Sep 19 16:09:26 UTC 2025","Fri Sep 19 16:09:57 UTC 2025","30972","","tests.CRMTests","","tests.CRMTests","testFailedLogin","testFailedLogin()","Unsuccessful login"
-"passed","Fri Sep 19 16:09:24 UTC 2025","Fri Sep 19 16:09:26 UTC 2025","2168","","tests.CRMTests","","tests.CRMTests","testLogin","testLogin()","Successful login"
+"passed","Wed Aug 12 19:21:20 UTC 2026","Wed Aug 12 19:21:53 UTC 2026","32998","","tests.CRMTests","","tests.CRMTests","testFailedLogin","testFailedLogin()","Unsuccessful login"
+"passed","Wed Aug 12 19:21:53 UTC 2026","Wed Aug 12 19:22:00 UTC 2026","6482","","tests.CRMTests","","tests.CRMTests","testLogout","testLogout()","Logout"
+"passed","Wed Aug 12 19:21:15 UTC 2026","Wed Aug 12 19:21:20 UTC 2026","5258","","tests.CRMTests","","tests.CRMTests","testLogin","testLogin()","Successful login"
+"skipped","Wed Aug 12 19:21:14 UTC 2026","Wed Aug 12 19:21:14 UTC 2026","1","","tests.MyInfoTests","","tests.MyInfoTests","openMyInfoPage","openMyInfoPage()",""

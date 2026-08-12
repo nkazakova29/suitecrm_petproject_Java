@@ -51,30 +51,24 @@ jobs:
     - name: Run Maven tests
       run: mvn clean test -B
       continue-on-error: true 
-
+    
     - name: Generate Allure Report
-      uses: simple-elf/allure-report-action@v1.11
       if: always()
-      with:
-        allure_results: target/allure-results
-        allure_history: allure-history
+      run: mvn allure:report -B
 
- 
+
     - name: Upload Allure results
       if: always()
       uses: actions/upload-artifact@v4
       with:
         name: allure-results
-        path: |
-          target/allure-results
-          allure-results
+        path: target/allure-results
         if-no-files-found: ignore
 
-   
     - name: Upload Allure report
       if: always()
       uses: actions/upload-artifact@v4
       with:
         name: allure-report
-        path: allure-report
+        path: target/site/allure-maven-plugin
         if-no-files-found: ignore

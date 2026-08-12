@@ -2,15 +2,14 @@ package BaseTest;
 
 import com.microsoft.playwright.BrowserContext;
 import data.LoginData;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import pages.CRMFirstPage;
 import pages.HomePage;
 import java.nio.file.Paths;
-import static BaseTest.BaseTest.baseUrl;
+
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class AuthSetUp extends BaseTest{
+public class AuthSetUpTest extends BaseTest{
 
 @Test
     public void authSetUp() {

@@ -1,5 +1,6 @@
-package BaseTest;
+package tests;
 
+import BaseTest.BaseTest;
 import com.microsoft.playwright.BrowserContext;
 import data.LoginData;
 import org.junit.jupiter.api.Test;
@@ -9,7 +10,7 @@ import java.nio.file.Paths;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class AuthSetUpTest extends BaseTest{
+public class A_AuthSetUpTest extends BaseTest {
 
 @Test
     public void authSetUp() {

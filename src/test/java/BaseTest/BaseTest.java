@@ -14,11 +14,13 @@ public class BaseTest {
     protected static Browser browser;
     protected Page page;
     protected BrowserContext context;
+    public static final String baseUrl = "https://opensource-demo.orangehrmlive.com/web/index.php/auth/login";
+
 
     @BeforeAll
     public static void setUpAll() {
         Playwright playwright = Playwright.create();
-        browser = playwright.chromium().launch(new BrowserType.LaunchOptions().setHeadless(true));
+        browser = playwright.chromium().launch(new BrowserType.LaunchOptions().setHeadless(false));
     }
 
     @BeforeEach

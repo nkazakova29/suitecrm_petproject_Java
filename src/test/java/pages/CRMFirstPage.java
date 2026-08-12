@@ -9,23 +9,23 @@ import io.qameta.allure.Step;
 public class CRMFirstPage {
 
     private final Page page;
-    private final String url = "https://opensource-demo.orangehrmlive.com/";
     private final Locator loginField;
     private final Locator passwordField;
     private final Locator submitBtn;
 
+    private final String baseUrl;
 
-
-    public CRMFirstPage(Page page) {
+    public CRMFirstPage(Page page, String baseUrl) {
         this.page = page;
         this.loginField = page.locator("[name='username']");
         this.passwordField = page.locator("[name='password']");
         this.submitBtn = page.locator("[type='submit']");
+        this.baseUrl = baseUrl;
     }
 
     @Step("Open the target site")
     public void open() {
-        page.navigate(url);
+        page.navigate(baseUrl);
     }
 
 

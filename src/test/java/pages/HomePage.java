@@ -10,11 +10,13 @@ public class HomePage {
     private final Page page;
     private final Locator dropDown;
     private final Locator logOutBtn;
+    private final Locator myInfoTab;
 
     public HomePage(Page page) {
         this.page = page;
         this.dropDown = page.locator(".oxd-userdropdown-icon");
         this.logOutBtn = page.locator("text=Logout");
+        this.myInfoTab = page.locator("text=My Info");
     }
 
     @Step("Checking that user can proceed to the next page")
@@ -37,7 +39,10 @@ public class HomePage {
 
     }
 
-
+    @Step("Go to My info tab")
+    public void goToMyInfo(){
+        myInfoTab.click();
+    }
 
 }
 

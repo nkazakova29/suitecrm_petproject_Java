@@ -1,6 +1,7 @@
 package tests;
 
 import BaseTest.BaseTest;
+import data.LoginData;
 import com.microsoft.playwright.*;
 import io.qameta.allure.Allure;
 import io.qameta.allure.Description;
@@ -8,37 +9,38 @@ import org.junit.jupiter.api.*;
 import pages.CRMFirstPage;
 import pages.HomePage;
 
+import java.nio.file.Paths;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 public class CRMTests extends BaseTest {
-    CRMFirstPage firstPage;
-    HomePage hpage;
 
     @Test
     @Description("Successful login")
 
 
     public void testLogin() {
-        String username = "Admin";
-        String password = "admin123";
+        LoginData.LoginCredentials credentials = LoginData.validUser();
         Allure.step("Open site and login", () -> {
-            CRMFirstPage firstPage = new CRMFirstPage(page);
+            CRMFirstPage firstPage = new CRMFirstPage(page, baseUrl);
             HomePage hpage = new HomePage(page);
             firstPage.open();
-            firstPage.login(username, password);
+            firstPage.login(credentials.username(), credentials.password());
             assertTrue(hpage.isLoggedIn(), "Logout");
+            context.storageState(
+                    new BrowserContext.StorageStateOptions()
+                            .setPath(Paths.get("storage/storageState.json")));
         });
     }
 
     @Test
     @Description("Unsuccessful login")
     public void testFailedLogin() {
-        CRMFirstPage firstPage = new CRMFirstPage(page);
+        LoginData.LoginCredentials credentials = LoginData.invalidUser();
+        CRMFirstPage firstPage = new CRMFirstPage(page, baseUrl);
         HomePage hpage = new HomePage(page);
-        String username = "Admin";
-        String password = "Admin";
         Allure.step("Open the target site", firstPage::open);
-        Allure.step("Perform login", () -> firstPage.login(username, password));
+        Allure.step("Perform login", () -> firstPage.login(credentials.username(), credentials.password()));
         assertFalse(hpage.isLoggedIn(), "Dashboard");
         assertTrue(firstPage.isErrorAppear(), "Invalid Credentials");
     }
@@ -46,13 +48,12 @@ public class CRMTests extends BaseTest {
     @Test
     @Description("Logout")
     public void testLogout() {
-        CRMFirstPage firstPage = new CRMFirstPage(page);
+        LoginData.LoginCredentials credentials = LoginData.validUser();
+        CRMFirstPage firstPage = new CRMFirstPage(page,baseUrl);
         HomePage hpage = new HomePage(page);
-        String username = "Admin";
-        String password = "admin123";
         Allure.step("Open site and login", () -> {
             firstPage.open();
-            firstPage.login(username, password);
+            firstPage.login(credentials.username(), credentials.password());
             hpage.logOut();
             assertTrue(firstPage.isLoggedOut(), "User hasn't been logged out");
 

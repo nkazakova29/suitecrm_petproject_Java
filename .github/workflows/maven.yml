@@ -6,7 +6,6 @@ on:
   pull_request:
     branches: [ main ]
 
-# Права, необходимые для публикации отчета на GitHub Pages
 permissions:
   contents: write
 

@@ -8,25 +8,42 @@ import com.microsoft.playwright.options.WaitForSelectorState;
 
 public class MyInfoPage {
     private Page page;
-    private Locator personalDetailsTab;
+    private Locator personalDetailsWindow;
+    private Locator contactDetailsTab;
+    private Locator contactAddress;
 
     public MyInfoPage(Page page) {
         this.page = page;
-        this.personalDetailsTab = page.getByRole(
+        this.personalDetailsWindow = page.getByRole(
                 AriaRole.HEADING,
                 new Page.GetByRoleOptions().setName("Personal Details")
         );;
+        this.contactDetailsTab = page.getByRole(AriaRole.TAB, new Page.GetByRoleOptions().setName("Contact Details"));
+        this.contactAddress = page.getByRole(AriaRole.HEADING, new Page.GetByRoleOptions().setName("Address"));
     }
 
     public boolean isMyInfoTabOpened(){
         try {
-            personalDetailsTab
+            personalDetailsWindow
                     .waitFor(new Locator.WaitForOptions().setState(WaitForSelectorState.VISIBLE).setTimeout(5000));
             return true;
         } catch (PlaywrightException e) {
             return false;
         }
     }
+    public void goToContactDetailsTab(){
+        contactDetailsTab.click();
     }
+
+    public boolean isContactDetailsOpened(){try {
+     contactAddress
+                .waitFor(new Locator.WaitForOptions().setState(WaitForSelectorState.VISIBLE).setTimeout(5000));
+        return true;
+    } catch (PlaywrightException e) {
+        return false;
+    }
+
+    }
+}
 
 

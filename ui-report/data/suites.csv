@@ -1,0 +1,8 @@
+"Status","Start Time","Stop Time","Duration in ms","Parent Suite","Suite","Sub Suite","Test Class","Test Method","Name","Description"
+"passed","Fri Aug 21 15:18:55 UTC 2026","Fri Aug 21 15:18:58 UTC 2026","3688","","tests.ApiUnAuthorizedTests","","tests.ApiUnAuthorizedTests","testSuccessfulAuth","POST /auth/validate - Successful Authorization",""
+"passed","Fri Aug 21 15:18:41 UTC 2026","Fri Aug 21 15:18:50 UTC 2026","8357","","tests.CRMTests","","tests.CRMTests","testLogout","testLogout()","Logout"
+"passed","Fri Aug 21 15:18:30 UTC 2026","Fri Aug 21 15:18:37 UTC 2026","6545","","tests.CRMTests","","tests.CRMTests","testLogin","testLogin()","Successful login"
+"passed","Fri Aug 21 15:18:50 UTC 2026","Fri Aug 21 15:18:54 UTC 2026","3538","","tests.ApiUnAuthorizedTests","","tests.ApiUnAuthorizedTests","testFailedAuth","POST /auth/validate - Failed Authorization",""
+"passed","Fri Aug 21 15:18:54 UTC 2026","Fri Aug 21 15:18:55 UTC 2026","1110","","tests.ApiUnAuthorizedTests","","tests.ApiUnAuthorizedTests","checkLoginEndpointAvailability","GET /auth/login - Check login page availability",""
+"broken","Fri Aug 21 15:18:13 UTC 2026","Fri Aug 21 15:18:13 UTC 2026","0","","tests.MyInfoTests","","tests.MyInfoTests","","MyInfoTests",""
+"passed","Fri Aug 21 15:18:37 UTC 2026","Fri Aug 21 15:18:41 UTC 2026","4345","","tests.CRMTests","","tests.CRMTests","testFailedLogin","testFailedLogin()","Unsuccessful login"

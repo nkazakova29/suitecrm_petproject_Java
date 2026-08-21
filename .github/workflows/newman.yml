@@ -1,7 +1,7 @@
 name: Newman API Tests
 
 on:
-  workflow_dispatch: 
+  workflow_dispatch:
   push:
     branches: [ "main" ]
 
@@ -16,13 +16,19 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
+      - name: Set up Java (required for Allure report generation)
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 17
+
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
           node-version: '20'
 
-      - name: Install Newman and Allure Reporter
-        run: npm install -g newman newman-reporter-allure
+      - name: Install Newman and Allure tools
+        run: npm install -g newman newman-reporter-allure allure-commandline --save-dev
 
       - name: Create results directory
         run: mkdir -p allure-results
@@ -34,13 +40,6 @@ jobs:
             --reporters cli,allure \
             --reporter-allure-resultsDir allure-results \
             --delay-request 300
-
-    
-      - name: Install Allure Commandline
-        uses: simple-elf/allure-publish-action@v2
-        if: always()
-        with:
-          generate_report: false
 
       - name: Generate Newman Allure HTML Report
         if: always()

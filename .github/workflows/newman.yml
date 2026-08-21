@@ -25,7 +25,7 @@ jobs:
 
       - name: Run Postman collection
         run: |
-          newman run postman/HRM-Pet-project.postman_collection.json \
+          newman run postman/orangehrm_collection.json \
             -e postman/orangehrm_environment.json \
             --env-var "base_url=https://opensource-demo.orangehrmlive.com" \
             --env-var "login=Admin" \

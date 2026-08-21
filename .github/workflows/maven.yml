@@ -2,9 +2,7 @@ name: Java Playwright Tests with Cloud SQL Proxy
 
 on:
   push:
-    branches: [ main ]
-  pull_request:
-    branches: [ main ]
+    branches: [ "main" ]
 
 permissions:
   contents: write
@@ -27,10 +25,6 @@ jobs:
       uses: actions/setup-node@v4
       with:
         node-version: 22
-
-    # 1. Устанавливаем Newman и репортер для Allure
-    - name: Install Newman and Allure Reporter
-      run: npm install -g newman newman-reporter-allure
 
     - name: Install Playwright browsers with deps
       run: npx playwright install --with-deps
@@ -55,20 +49,10 @@ jobs:
           nc -z localhost 5437 && break || sleep 1
         done
 
-    # 2. Запускаем Postman тесты ДО Maven (они положат свои результаты в папку allure-results)
-    - name: Run Postman collection via Newman
-      run: |
-        newman run postman/orangehrm_collection.json \
-          -e postman/orangehrm_environment.json \
-          --reporters cli,allure \
-          --reporter-allure-resultsDir allure-results \
-          --delay-request 300
-
     - name: Run Maven tests
       run: mvn clean test -B
       continue-on-error: true 
 
-    # 3. Maven Allure плагин подхватит результаты ИЗ ТОЙ ЖЕ папки allure-results (где уже лежат данные Postman)
     - name: Generate Allure Report
       if: always()
       run: mvn allure:report -B
@@ -77,7 +61,7 @@ jobs:
       if: always()
       uses: actions/upload-artifact@v4
       with:
-        name: allure-results
+        name: ui-allure-results
         path: allure-results
         if-no-files-found: ignore
 
@@ -85,13 +69,15 @@ jobs:
       if: always()
       uses: actions/upload-artifact@v4
       with:
-        name: allure-report
+        name: ui-allure-report
         path: target/site/allure-maven-plugin
         if-no-files-found: ignore
 
-    - name: Deploy Allure Report to GitHub Pages
+    - name: Deploy UI Allure Report to GitHub Pages (/ui-report)
       uses: peaceiris/actions-gh-pages@v4
       if: always()
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
         publish_dir: target/site/allure-maven-plugin
+        destination_dir: ui-report
+        keep_files: true

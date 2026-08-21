@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="refresh" content="0;url='https://opensource-demo.orangehrmlive.com/web/index.php/dashboard/index'" />
+
+        <title>Redirecting to https://opensource-demo.orangehrmlive.com/web/index.php/dashboard/index</title>
+    </head>
+    <body>
+        Redirecting to <a href="https://opensource-demo.orangehrmlive.com/web/index.php/dashboard/index">https://opensource-demo.orangehrmlive.com/web/index.php/dashboard/index</a>.
+    </body>
+</html>

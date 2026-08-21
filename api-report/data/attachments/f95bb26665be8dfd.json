@@ -1,0 +1,12 @@
+{
+    "Cookie": "orangehrm=6ksf5c8hgmqj4l4jpcsitf8kk8; orangehrm=6rlgdtcceeqe51fpo3aj98fm46",
+    "Content-Type": "application/json",
+    "User-Agent": "PostmanRuntime/7.39.1",
+    "Accept": "*/*",
+    "Cache-Control": "no-cache",
+    "Postman-Token": "3cd6bb66-c759-4412-93da-5ba8244ddf21",
+    "Host": "opensource-demo.orangehrmlive.com",
+    "Accept-Encoding": "gzip, deflate, br",
+    "Connection": "keep-alive",
+    "Content-Length": "77"
+}

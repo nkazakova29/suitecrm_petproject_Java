@@ -3,14 +3,11 @@ name: Newman API Tests
 on:
   push:
     branches: [ "main", "master" ]
-  pull_request:
-    branches: [ "main", "master" ]
-  workflow_dispatch: # Позволяет запускать тесты вручную из вкладки Actions
+  workflow_dispatch:
 
 jobs:
   test:
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -20,14 +17,20 @@ jobs:
         with:
           node-version: '20'
 
-      - name: Install Newman
-        run: npm install -g newman
+      - name: Install Newman and Allure Reporter
+        run: npm install -g newman newman-reporter-allure
 
       - name: Run Postman collection
         run: |
           newman run postman/orangehrm_collection.json \
             -e postman/orangehrm_environment.json \
-            --env-var "base_url=https://opensource-demo.orangehrmlive.com" \
-            --env-var "login=Admin" \
-            --env-var "password=admin123" \
+            --reporters cli,allure \
+            --reporter-allure-resultsDir allure-results \
             --delay-request 300
+
+      - name: Upload Allure Results
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: allure-results
+          path: allure-results

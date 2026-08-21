@@ -1,0 +1,15 @@
+{
+    "Server": "nginx/1.18.0 (Ubuntu)",
+    "Date": "Fri, 21 Aug 2026 15:26:49 GMT",
+    "Content-Type": "text/html; charset=utf-8",
+    "Transfer-Encoding": "chunked",
+    "Connection": "keep-alive",
+    "Set-Cookie": "orangehrm=gur39f07g31kvsaie3lfkg8mb4; path=/web; secure; HttpOnly; SameSite=Lax",
+    "Cache-Control": "no-cache, private",
+    "Location": "https://opensource-demo.orangehrmlive.com/web/index.php/dashboard/index",
+    "X-Content-Type-Options": "nosniff",
+    "X-XSS-Protection": "1; mode=block",
+    "Strict-Transport-Security": "max-age=63072000; includeSubdomains;",
+    "Content-Security-Policy": "default-src blob: 'self' mailto:* *.projects-abroad.net native.testing.equest.com www.youtube.com www.google.com demo.docusign.net sandbox.e-signlive.com player.vimeo.com fonts.googleapis.com fonts.gstatic.com 'unsafe-inline' 'unsafe-eval';img-src * 'self' data: blob;font-src 'self' fonts.gstatic.com sandbox.e-signlive.com data:",
+    "Public-Key-Pins": "pin-sha256=\"yQhO6YqQX5Y/NxyHAjXnI3jOtYWUm/TtRr666RunXRg=\";pin-sha256=\"WXDfGFFCnQIIh0nuqVGw4nFn+aeW/FrzWeec5j/+FKI=\";pin-sha256=\"Md7QJIL/UMqdHaS73pEkLHm5ofUUE35+r4SYdM014/E=\"; max-age=63072000; includeSubDomains"
+}

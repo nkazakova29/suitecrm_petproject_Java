@@ -1,0 +1,19 @@
+var cheerio = require('cheerio');
+const $ = cheerio.load(pm.response.text());
+
+// 1. Извлекаем чистый CSRF-токен
+const rawToken = $('auth-login').attr(':token');
+if (rawToken) {
+    const cleanToken = rawToken.replace(/&quot;/g, '').replace(/^"|"$/g, '');
+    pm.environment.set("csrf_token", cleanToken);
+    console.log("Сохранен CSRF-токен:", cleanToken);
+}
+
+// 2. Сохраняем Cookie сессии в переменную
+const setCookie = pm.response.headers.get("Set-Cookie");
+if (setCookie) {
+    // Берем первую часть заголовка (orangehrm=XXXXX)
+    const sessionCookie = setCookie.split(';')[0];
+    pm.environment.set("session_cookie", sessionCookie);
+    console.log("Сохранена Cookie:", sessionCookie);
+}

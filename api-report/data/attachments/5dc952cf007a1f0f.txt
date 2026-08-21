@@ -1,5 +1,0 @@
-{
-  "firstName": "Mefodiy",
-  "middleName": "Netu",
-  "lastName": "Buslaev"
-}

@@ -1,7 +1,0 @@
-"DESCRIPTION","DURATION IN MS","NAME","PARENT SUITE","START TIME","STATUS","STOP TIME","SUB SUITE","SUITE","TEST CLASS","TEST METHOD"
-"","650","Create user","HRM-Pet-project","2026-08-21","passed","2026-08-21","","","",""
-"","32014","check availability","HRM-Pet-project","2026-08-21","passed","2026-08-21","","","",""
-"","599","New Request","HRM-Pet-project","2026-08-21","passed","2026-08-21","","","",""
-"","978","Logged in","HRM-Pet-project","2026-08-21","passed","2026-08-21","","","",""
-"","1372","get created user","HRM-Pet-project","2026-08-21","passed","2026-08-21","","","",""
-"","10316","Auth","HRM-Pet-project","2026-08-21","passed","2026-08-21","","","",""

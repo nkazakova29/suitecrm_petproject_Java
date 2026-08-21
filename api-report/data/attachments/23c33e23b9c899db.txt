@@ -1,2 +1,0 @@
-level: log, messages: Сохранен CSRF-токен:,6cd9d9854add8ad43c5b03.9Vf0mlO4yCK6HtxWCOrgJLtHsUlD4ig0MIcwuLa3Ycw.hQO7rzD9v2HOd-4SUNyWXoMXiTwk1mV8af5xy_zGN6WAD5CtA82bbslXuw
-level: log, messages: Сохранена Cookie:,orangehrm=h32ipr2o533akrku1pc4vp7ii0

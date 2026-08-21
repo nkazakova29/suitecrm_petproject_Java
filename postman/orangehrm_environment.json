@@ -1,0 +1,44 @@
+{
+  "_": {
+    "postman_variable_scope": "environment",
+    "postman_exported_at": "2026-08-21T14:18:23.576Z",
+    "postman_exported_using": "Newman/6.2.2"
+  },
+  "id": "8fce4e9e-1765-4a7d-a797-52cbd56361a6",
+  "name": "Test",
+  "values": [
+    {
+      "type": "any",
+      "value": "https://opensource-demo.orangehrmlive.com",
+      "key": "base_url"
+    },
+    {
+      "type": "any",
+      "value": "Admin",
+      "key": "login"
+    },
+    {
+      "type": "any",
+      "value": "admin123",
+      "key": "password"
+    },
+    {
+      "type": "any",
+      "value": "79fd2c36bf1a9556234911d69a.ObsHy8kV5vfDzoAlgz1RKso85KlphCLP4LOWKU4E56I.U_M3849ZspqIvrRDxm4ef4lwt9AZ4Xr-o_XmfCZWq_cJym-U8VmOxLeg7w",
+      "key": "csrf_token"
+    },
+    {
+      "type": "any",
+      "value": "orangehrm=aqrnegvf21mtconsiioonjrfeh",
+      "key": "session_cookie"
+    },
+    {
+      "type": "any",
+      "value": 212,
+      "key": "created_emp_number"
+    }
+  ],
+  "_postman_variable_scope": "environment",
+  "_postman_exported_at": "2026-08-21T14:25:10.970Z",
+  "_postman_exported_using": "Newman/6.2.2"
+}

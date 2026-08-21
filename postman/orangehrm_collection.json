@@ -1,0 +1,333 @@
+{
+  "info": {
+    "_postman_id": "c53be371-c1bc-415c-89b4-def513bc1b91",
+    "name": "HRM-Pet-project",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "46830146",
+    "_collection_link": "https://go.postman.co/collection/46830146-c53be371-c1bc-415c-89b4-def513bc1b91?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "check availability",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "https://opensource-demo.orangehrmlive.com",
+          "protocol": "https",
+          "host": [
+            "opensource-demo",
+            "orangehrmlive",
+            "com"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Auth",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "var cheerio = require('cheerio');",
+              "const $ = cheerio.load(pm.response.text());",
+              "",
+              "// 1. Извлекаем чистый CSRF-токен",
+              "const rawToken = $('auth-login').attr(':token');",
+              "if (rawToken) {",
+              "    const cleanToken = rawToken.replace(/&quot;/g, '').replace(/^\"|\"$/g, '');",
+              "    pm.environment.set(\"csrf_token\", cleanToken);",
+              "    console.log(\"Сохранен CSRF-токен:\", cleanToken);",
+              "}",
+              "",
+              "// 2. Сохраняем Cookie сессии в переменную",
+              "const setCookie = pm.response.headers.get(\"Set-Cookie\");",
+              "if (setCookie) {",
+              "    // Берем первую часть заголовка (orangehrm=XXXXX)",
+              "    const sessionCookie = setCookie.split(';')[0];",
+              "    pm.environment.set(\"session_cookie\", sessionCookie);",
+              "    console.log(\"Сохранена Cookie:\", sessionCookie);",
+              "}"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{base_url}}/web/index.php/auth/login",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "web",
+            "index.php",
+            "auth",
+            "login"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Logged in",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "// Получаем ВСЕ заголовки ответа в виде массива объектов",
+              "const allHeaders = pm.response.headers.all();",
+              "",
+              "// Фильтруем заголовки Set-Cookie и находим тот, где есть \"orangehrm=\"",
+              "const setCookieHeader = allHeaders.find(header => ",
+              "    header.key.toLowerCase() === 'set-cookie' && header.value.includes('orangehrm=')",
+              ");",
+              "",
+              "if (setCookieHeader) {",
+              "    // Достаем чистое значение \"orangehrm=XXXXX\" до первой точки с запятой",
+              "    const sessionCookie = setCookieHeader.value.split(';')[0].trim();",
+              "    ",
+              "    pm.environment.set(\"session_cookie\", sessionCookie);",
+              "    console.log(\"УСПЕШНО СОХРАНЕНО В ENVIRONMENT:\", sessionCookie);",
+              "} else {",
+              "    console.log(\"Заголовок Set-Cookie с orangehrm не найден\");",
+              "}"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "protocolProfileBehavior": {
+        "disableCookies": true,
+        "followRedirects": false
+      },
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Referer",
+            "value": "[https://opensource-demo.orangehrmlive.com/web/index.php/auth/login](https://opensource-demo.orangehrmlive.com/web/index.php/auth/login)",
+            "type": "text"
+          },
+          {
+            "key": "Cookie",
+            "value": "{{session_cookie}}",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "urlencoded",
+          "urlencoded": [
+            {
+              "key": "_token",
+              "value": "{{csrf_token}}",
+              "type": "text",
+              "uuid": "ed9748d2-ce5c-4d95-b8fc-77378160745d"
+            },
+            {
+              "key": "username",
+              "value": "{{login}}",
+              "type": "text",
+              "uuid": "77b27fa4-87a0-49cc-bdd3-e501e6287825"
+            },
+            {
+              "key": "password",
+              "value": "{{password}}",
+              "type": "text",
+              "uuid": "f8772892-a756-41d9-a0f1-065918c3dd2b"
+            }
+          ]
+        },
+        "url": {
+          "raw": "{{base_url}}/web/index.php/auth/validate",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "web",
+            "index.php",
+            "auth",
+            "validate"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Create user",
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "exec": [
+              ""
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        },
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "",
+              "pm.test(\"Сотрудник успешно создан\", function () {",
+              "    pm.response.to.have.status(200);",
+              "});",
+              "",
+              "const responseData = pm.response.json();",
+              "if (responseData.data && responseData.data.empNumber) {",
+              "    pm.environment.set(\"created_emp_number\", responseData.data.empNumber);",
+              "    console.log(\"Сохранен ID сотрудника:\", responseData.data.empNumber);",
+              "}"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Cookie",
+            "value": "{{session_cookie}}",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"firstName\": \"Mefodiy\",\n  \"middleName\": \"Netu\",\n  \"lastName\": \"Buslaev\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{base_url}}/web/index.php/api/v2/pim/employees",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "web",
+            "index.php",
+            "api",
+            "v2",
+            "pim",
+            "employees"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "get created user",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              ""
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "protocolProfileBehavior": {
+        "disableCookies": true
+      },
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Cookie",
+            "value": "{{session_cookie}}",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "{{base_url}}/web/index.php/api/v2/pim/employees/{{created_emp_number}}",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "web",
+            "index.php",
+            "api",
+            "v2",
+            "pim",
+            "employees",
+            "{{created_emp_number}}"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "New Request",
+      "protocolProfileBehavior": {
+        "disabledSystemHeaders": {
+          "accept": true
+        }
+      },
+      "request": {
+        "method": "DELETE",
+        "header": [
+          {
+            "key": "Cookie",
+            "value": "{{session_cookie}}",
+            "type": "text"
+          },
+          {
+            "key": "X-Requested-With",
+            "value": "XMLHttpRequest",
+            "type": "text"
+          },
+          {
+            "key": "Accept",
+            "value": "application/json, text/plain, */*",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"ids\": [\n   {{created_emp_number}}\n  ]\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{base_url}}/web/index.php/api/v2/pim/employees",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "web",
+            "index.php",
+            "api",
+            "v2",
+            "pim",
+            "employees"
+          ]
+        }
+      },
+      "response": []
+    }
+  ]
+}

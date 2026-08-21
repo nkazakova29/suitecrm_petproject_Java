@@ -2,9 +2,11 @@ name: Java Playwright Tests with Cloud SQL Proxy
 
 on:
   push:
-    branches: [ main ]
-  pull_request:
-    branches: [ main ]
+    branches: [ "main" ]
+
+concurrency:
+  group: pages-deployment
+  cancel-in-progress: false
 
 permissions:
   contents: write
@@ -63,7 +65,7 @@ jobs:
       if: always()
       uses: actions/upload-artifact@v4
       with:
-        name: allure-results
+        name: ui-allure-results
         path: allure-results
         if-no-files-found: ignore
 
@@ -71,14 +73,15 @@ jobs:
       if: always()
       uses: actions/upload-artifact@v4
       with:
-        name: allure-report
+        name: ui-allure-report
         path: target/site/allure-maven-plugin
         if-no-files-found: ignore
 
-
-    - name: Deploy Allure Report to GitHub Pages
-      uses: peaceiris/actions-gh-pages@v3
+    - name: Deploy UI Allure Report to GitHub Pages (/ui-report)
+      uses: peaceiris/actions-gh-pages@v4
       if: always()
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
         publish_dir: target/site/allure-maven-plugin
+        destination_dir: ui-report
+        keep_files: true

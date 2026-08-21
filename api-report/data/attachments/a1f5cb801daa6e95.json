@@ -1,0 +1,12 @@
+{
+    "Referer": "[https://opensource-demo.orangehrmlive.com/web/index.php/auth/login](https://opensource-demo.orangehrmlive.com/web/index.php/auth/login)",
+    "Cookie": "orangehrm=h32ipr2o533akrku1pc4vp7ii0",
+    "User-Agent": "PostmanRuntime/7.39.1",
+    "Accept": "*/*",
+    "Cache-Control": "no-cache",
+    "Postman-Token": "0637f3cd-fe0c-4bb3-88bb-2e62f2722842",
+    "Host": "opensource-demo.orangehrmlive.com",
+    "Accept-Encoding": "gzip, deflate, br",
+    "Connection": "keep-alive",
+    "Content-Length": "165"
+}

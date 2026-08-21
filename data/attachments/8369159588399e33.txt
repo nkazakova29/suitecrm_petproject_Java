@@ -1,0 +1,17 @@
+// Получаем ВСЕ заголовки ответа в виде массива объектов
+const allHeaders = pm.response.headers.all();
+
+// Фильтруем заголовки Set-Cookie и находим тот, где есть "orangehrm="
+const setCookieHeader = allHeaders.find(header => 
+    header.key.toLowerCase() === 'set-cookie' && header.value.includes('orangehrm=')
+);
+
+if (setCookieHeader) {
+    // Достаем чистое значение "orangehrm=XXXXX" до первой точки с запятой
+    const sessionCookie = setCookieHeader.value.split(';')[0].trim();
+    
+    pm.environment.set("session_cookie", sessionCookie);
+    console.log("УСПЕШНО СОХРАНЕНО В ENVIRONMENT:", sessionCookie);
+} else {
+    console.log("Заголовок Set-Cookie с orangehrm не найден");
+}

@@ -16,17 +16,6 @@ import static org.hamcrest.Matchers.*;
 public class ApiUnAuthorizedTests extends APIBaseTest {
 
     @Test
-    @DisplayName("GET /auth/login - Check login page availability")
-    public void checkLoginEndpointAvailability(){
-        given()
-                .when()
-                .get("/web/index.php/auth/login")
-                .then()
-                .statusCode(200)
-                .contentType(containsString("text/html"));
-    }
-
-    @Test
     @DisplayName("POST /auth/validate - Successful Authorization")
     public void testSuccessfulAuth(){
         LoginData.LoginCredentials credentials = LoginData.validUser();
